@@ -37,7 +37,9 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
+process.env
 .env
+keys.tsx
 HomeScreen.tsx
 
 # BUCK
