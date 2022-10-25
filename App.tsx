@@ -1,66 +1,27 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-import { Header } from './Components/HeaderComponents/Header';
-
-import HomeScreen from './Components/HomeScreenComponents/HomeScreen';
+import { GiphySDK } from "@giphy/react-native-sdk";
+import React from "react";
+import { StyleSheet } from "react-native";
+import { keys } from "./keys";
+import { DrawerNavigation } from "./Src/Navigation/DrawerNavigation";
+import { CurrentMediaState } from "./Src/State_Management/CurrentMediaState";
 
 export type Props = {
   children: JSX.Element[] | JSX.Element | string;
-  title: string;
 };
 
-const Section: React.FC<Props> = ({ children, title }) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: "black"
-          },
-        ]}
-      >
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: "black"
-          },
-        ]}
-      >
-        {children}
-      </Text>
-    </View>
-  );
-};
+const API_KEY = keys.GIPHY_DEMO_SDK_KEY;
+// Configure API keys
+GiphySDK.configure({ apiKey: API_KEY });
 
-const App: () => JSX.Element = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
+const App: React.FC<Props> = () => {
   const backgroundStyle = {
-    backgroundColor: "white"
+    backgroundColor: "white",
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}
-      >
-        <Header/>
-      <HomeScreen/>
-      </ScrollView>
-    </SafeAreaView>
+    <CurrentMediaState>
+      <DrawerNavigation />
+    </CurrentMediaState>
   );
 };
 
@@ -71,15 +32,15 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: "400",
   },
   highlight: {
-    fontWeight: '700',
+    fontWeight: "700",
   },
 });
 
