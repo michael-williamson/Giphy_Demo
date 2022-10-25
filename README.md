@@ -22,4 +22,4 @@ Demo app designed using API of Giphy site
    "
 5. Very Important!! Now add "keys.tsx" in the .gitignore file to prevent any Keys being pushed to a public repository.
 
-6. After configuring an emulator to run React Native, type either npx react-native run-android || npx react-native run-ios
+6. After configuring an emulator to run React Native, type either npx react-native run-android
