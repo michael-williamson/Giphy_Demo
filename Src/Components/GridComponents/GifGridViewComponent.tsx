@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Pressable, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { INDIVIDUAL_GIF_SCREEN } from "../../VariableConstants/VARIABLE_CONSTANTS";
 
 export type Props = {
@@ -49,7 +49,7 @@ export const GifGridViewComponent: React.FC<Props> = ({
 
         navigation.navigate(INDIVIDUAL_GIF_SCREEN);
       }}
-      style={{ alignItems: "center", flex: 1 }}
+      style={style.button}
     >
       <Image
         source={{ uri: imageObject.url }}
@@ -62,3 +62,10 @@ export const GifGridViewComponent: React.FC<Props> = ({
     </Pressable>
   );
 };
+
+const style = StyleSheet.create({
+  button: {
+    alignItems: "center",
+    flex: 1,
+  },
+});

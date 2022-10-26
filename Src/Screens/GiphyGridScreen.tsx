@@ -7,7 +7,7 @@ import {
   Pressable,
   useWindowDimensions,
   ListRenderItem,
-  ScrollView,
+  StyleSheet,
 } from "react-native";
 import { useCurrentMediaContextUpdater } from "../State_Management/CurrentMediaState";
 import { keys } from "../../keys";
@@ -159,48 +159,20 @@ export const GiphyGridScreen: React.FC<Props> = ({ navigation }) => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={style.container}>
       <View style={{ marginTop: 10 }}>
-        <Text
-          style={{
-            color: "black",
-            fontSize: 20,
-            fontWeight: "bold",
-            textAlign: "center",
-          }}
-        >
-          Search Gifs
-        </Text>
+        <Text style={style.inputLabel}>Search Gifs</Text>
         <TextInput
           autoFocus
           onChangeText={handleTextInput}
           placeholder="Search..."
           value={searchQuery}
-          style={{
-            color: "white",
-            borderColor: "black",
-            backgroundColor: "black",
-            marginTop: 10,
-            marginBottom: 10,
-            marginLeft: "auto",
-            marginRight: "auto",
-            width: "95%",
-          }}
+          style={style.textInput}
         />
       </View>
       <View style={{ paddingVertical: 10 }}>
         <View>
-          <Text
-            style={{
-              color: "black",
-              fontSize: 20,
-              fontWeight: "bold",
-              textAlign: "center",
-              marginBottom: 10,
-            }}
-          >
-            No. of Columns
-          </Text>
+          <Text style={style.columnsLabel}>No. of Columns</Text>
         </View>
         <View style={{ alignItems: "center" }}>
           <FlatList
@@ -239,17 +211,7 @@ export const GiphyGridScreen: React.FC<Props> = ({ navigation }) => {
             renderItem={renderGifGridView}
             ListFooterComponent={
               <View>
-                <Text
-                  style={{
-                    color: "black",
-                    fontSize: 20,
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    marginBottom: 10,
-                  }}
-                >
-                  Pages
-                </Text>
+                <Text style={style.paginationLabel}>Pages</Text>
 
                 <FlatList
                   data={paginationArray}
@@ -266,3 +228,39 @@ export const GiphyGridScreen: React.FC<Props> = ({ navigation }) => {
     </View>
   );
 };
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  inputLabel: {
+    color: "black",
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  textInput: {
+    color: "white",
+    borderColor: "black",
+    backgroundColor: "black",
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: "auto",
+    marginRight: "auto",
+    width: "95%",
+  },
+  columnsLabel: {
+    color: "black",
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  paginationLabel: {
+    color: "black",
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+});
