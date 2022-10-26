@@ -22,12 +22,21 @@ export const GifGridViewComponent: React.FC<Props> = ({
   // on the images object there are many choices of images dimensions along with file size
   // here are some possibilities "downsized_small", "downsized",
   const imageObject = item.images.downsized;
-  // width & height properties on image object are typeof string & need to be converted to an integer
+  if (
+    imageObject === undefined ||
+    Object.values(imageObject).find((item) => item === undefined) ||
+    Object.values(imageObject).length === 0
+  ) {
+    return <View></View>;
+  }
+
   const width = parseInt(imageObject.width);
   const maxWidth = windowWidth / numColumns;
   const height = parseInt(imageObject.height);
   let aspectWidth = width < maxWidth ? width : maxWidth;
   const aspectRatio = aspectWidth / height;
+  const heightAdjusted = height * aspectRatio;
+
   return (
     <Pressable
       key={item.id}
@@ -47,7 +56,7 @@ export const GifGridViewComponent: React.FC<Props> = ({
         style={{
           maxWidth: maxWidth,
           width: width,
-          height: height * aspectRatio,
+          height: heightAdjusted,
         }}
       />
     </Pressable>
