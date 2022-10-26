@@ -7,6 +7,7 @@ import {
   Pressable,
   useWindowDimensions,
   ListRenderItem,
+  ScrollView,
 } from "react-native";
 import { useCurrentMediaContextUpdater } from "../State_Management/CurrentMediaState";
 import { keys } from "../../keys";
@@ -230,35 +231,38 @@ export const GiphyGridScreen: React.FC<Props> = ({ navigation }) => {
       </View>
 
       {gifs.length > 0 && (
-        <FlatList
-          data={gifs}
-          numColumns={columns}
-          key={columns}
-          renderItem={renderGifGridView}
-          style={{ flexGrow: 0 }}
-        />
+        <View style={{ flex: 1 }}>
+          <FlatList
+            data={gifs}
+            numColumns={columns}
+            key={columns}
+            renderItem={renderGifGridView}
+            ListFooterComponent={
+              <View>
+                <Text
+                  style={{
+                    color: "black",
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  Pages
+                </Text>
+
+                <FlatList
+                  data={paginationArray}
+                  renderItem={renderPaginationList}
+                  horizontal={true}
+                  style={{ flexGrow: 0 }}
+                />
+              </View>
+            }
+            style={{ flexGrow: 0 }}
+          />
+        </View>
       )}
-
-      <View>
-        <Text
-          style={{
-            color: "black",
-            fontSize: 20,
-            fontWeight: "bold",
-            textAlign: "center",
-            marginBottom: 10,
-          }}
-        >
-          Pages
-        </Text>
-
-        <FlatList
-          data={paginationArray}
-          renderItem={renderPaginationList}
-          horizontal={true}
-          style={{ flexGrow: 0 }}
-        />
-      </View>
     </View>
   );
 };
