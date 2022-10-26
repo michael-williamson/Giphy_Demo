@@ -23,3 +23,8 @@ Demo app designed using API of Giphy site
 5. Very Important!! Now add "keys.tsx" in the .gitignore file to prevent any Keys being pushed to a public repository.
 
 6. After configuring an emulator to run React Native, type either npx react-native run-android
+
+# Notes
+
+!!important: There are some Object properties in the Giphy API that may not contain values thus returning undefined. It is important to consider handling this possibility so that
+it doesn't break the app. One example is here: https://developers.giphy.com/docs/api/schema#image-object In the first paragraph " (Please note that some GIFs don’t have every property available.)"
