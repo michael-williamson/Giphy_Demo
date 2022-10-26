@@ -2,10 +2,16 @@
 
 Demo app designed using API of Giphy site
 
+![alt text](https://github.com/michael-williamson/Giphy_Demo/blob/main/media/welcome_screen.png)
+![alt text](https://github.com/michael-williamson/Giphy_Demo/blob/main/media/search_screen.png)
+![alt text](https://github.com/michael-williamson/Giphy_Demo/blob/main/media/favorites_screen.png)
+
 # Technologies
 
 1. React.js 18.1.0
 2. React Native 0.70.3
+3. Giphy React Native SDK 1.11.1
+4. React Navigation 6.0.13
 
 # Setup Instructions
 
@@ -26,5 +32,5 @@ Demo app designed using API of Giphy site
 
 # Notes
 
-!!important: There are some Object properties in the Giphy API that may not contain values thus returning undefined. It is important to consider handling this possibility so that
+!! important: There are some Object properties in the Giphy API that may not contain values thus returning undefined. It is important to consider handling this possibility so that
 it doesn't break the app. One example is here: https://developers.giphy.com/docs/api/schema#image-object In the first paragraph " (Please note that some GIFs don’t have every property available.)"
