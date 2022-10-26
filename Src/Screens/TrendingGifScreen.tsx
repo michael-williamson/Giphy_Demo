@@ -1,7 +1,7 @@
 import { GiphyContent, GiphyGridView } from "@giphy/react-native-sdk";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { theme } from "../../theme";
 import { RootStackParamList } from "../Navigation/NavigationStack";
 import { useCurrentMediaContextUpdater } from "../State_Management/CurrentMediaState";
@@ -15,20 +15,10 @@ export const TrendingGifScreen: React.FC<Props> = ({ navigation }) => {
   const [columns, setColumns] = useState(1);
   const currentMediaContextUpdater = useCurrentMediaContextUpdater();
   return (
-    <View>
-      <Text>Trending Gifs</Text>
+    <View style={style.container}>
+      <Text style={style.title}>Trending Gifs</Text>
       <View>
-        <Text
-          style={{
-            color: "black",
-            fontSize: 20,
-            fontWeight: "bold",
-            textAlign: "center",
-            marginBottom: 10,
-          }}
-        >
-          No. of Columns
-        </Text>
+        <Text style={style.columnsLabel}>No. of Columns</Text>
       </View>
       <View style={{ alignItems: "center" }}>
         <FlatList
@@ -59,7 +49,7 @@ export const TrendingGifScreen: React.FC<Props> = ({ navigation }) => {
         content={GiphyContent.trendingGifs()}
         cellPadding={3}
         spanCount={columns}
-        style={{ height: 500, marginTop: 24 }}
+        style={style.giphyGridView}
         onMediaSelect={(e) => {
           currentMediaContextUpdater(e.nativeEvent.media);
           navigation.navigate(INDIVIDUAL_GIF_SCREEN);
@@ -68,3 +58,27 @@ export const TrendingGifScreen: React.FC<Props> = ({ navigation }) => {
     </View>
   );
 };
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: "bold",
+    marginTop: 10,
+    marginBottom: 30,
+    textAlign: "center",
+    color: "black",
+  },
+  columnsLabel: {
+    color: "black",
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  giphyGridView: {
+    flex: 1,
+  },
+});
