@@ -44,7 +44,7 @@ const style = StyleSheet.create({
   drawerClose: {
     fontSize: 30,
     fontWeight: "bold",
-    color: "black",
+    color: "white",
   },
   drawerItem: {
     fontSize: 25,

@@ -28,6 +28,11 @@ export const DrawerNavigation = () => {
         initialRouteName="WelcomeScreen"
         useLegacyImplementation
         drawerContent={(props) => <DrawerNavigationComponent {...props} />}
+        screenOptions={{
+          drawerStyle: {
+            backgroundColor: "rgba(0,0,0,.85)",
+          },
+        }}
       >
         <Drawer.Screen
           name="WelcomeScreen"
