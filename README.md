@@ -23,7 +23,8 @@
 
 4. Once these keys are available create a file in the root folder "keys.tsx" & inside this file create an exported object
 
-```export const keys = {
+```
+export const keys = {
   GIPHY_DEMO_SDK_KEY:"YOUR_SDK_KEY",
   GIPHY_DEMO_API_KEY:"YOUR_API_KEY"
   }
@@ -31,7 +32,11 @@
 
 5. **Very Important!!** Now add "_keys.tsx_" in the _.gitignore_ file to prevent any Keys being pushed to a public repository.
 
-6. After configuring an emulator to run React Native, type npx react-native run-android
+6. After configuring an emulator to run React Native, type
+
+```
+npx react-native run-android
+```
 
 # Notes
 
