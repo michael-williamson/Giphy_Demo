@@ -31,6 +31,51 @@ export const GiphyGridScreen: React.FC<Props> = ({ navigation }) => {
   const [paginationArray, setPaginationArray] = useState<Array<number>>([]);
 
   useEffect(() => {
+    // anytime the search query changes reset the offset state back to 0 and currentPage to 1 so that the pagination represents
+    //--> page 1 & zero offset
+    setOffset(1);
+    setCurrentPage(1);
+
+    if (defferedSearchQuery === "") {
+      setGifs([]);
+      return;
+    }
+
+    async function searchGifs() {
+      //api search endpoint returns {data:array of object,pagination:Pagination Object,meta:Meta Object}
+      //--> for each object in data array, the properties {id,images} where images is an object containing
+      //--> various image sizes & url sources making up their own objects
+      // `${BASE_URL}?api_key=${API_KEY}&q=${defferedSearchQuery}&limit=20`
+      try {
+        const API_KEY = keys.GIPHY_DEMO_API_KEY;
+        const BASE_URL = "http://api.giphy.com/v1/gifs/search";
+        const limit = 20;
+        const resJson = await fetch(
+          `${BASE_URL}?api_key=${API_KEY}&q=${defferedSearchQuery}&limit=${limit}`
+        );
+        const res = await resJson.json();
+        const total = parseInt(res.pagination.total_count);
+        const numPages = total / limit > 10 ? 10 : total / limit;
+        setGifs(res.data);
+        paginationArray.length !== numPages &&
+          setPaginationArray(Array(numPages));
+      } catch (error) {
+        console.warn(error);
+      }
+    }
+    searchGifs();
+  }, [defferedSearchQuery]);
+
+  useEffect(() => {
+    // similar to other useEffect but this one deals specifically with an API call with the offset param included
+    //--> it is predefined that any change in offset happens around the idea the value of deferredSearchQuery has not changed
+
+    // Also this effect will be triggered when offset changes back to zero but the only necessary API call will happen in the other useEffect
+    //--> this case is handled below
+    if (offset === 0) {
+      return;
+    }
+
     async function searchGifs() {
       //api search endpoint returns {data:array of object,pagination:Pagination Object,meta:Meta Object}
       //--> for each object in data array, the properties {id,images} where images is an object containing
@@ -54,7 +99,7 @@ export const GiphyGridScreen: React.FC<Props> = ({ navigation }) => {
       }
     }
     searchGifs();
-  }, [defferedSearchQuery, offset]);
+  }, [offset]);
 
   const renderGifGridView: ListRenderItem<any> = ({
     item,
@@ -184,13 +229,15 @@ export const GiphyGridScreen: React.FC<Props> = ({ navigation }) => {
         </View>
       </View>
 
-      <FlatList
-        data={gifs}
-        numColumns={columns}
-        key={columns}
-        renderItem={renderGifGridView}
-        style={{ flexGrow: 0 }}
-      />
+      {gifs.length > 0 && (
+        <FlatList
+          data={gifs}
+          numColumns={columns}
+          key={columns}
+          renderItem={renderGifGridView}
+          style={{ flexGrow: 0 }}
+        />
+      )}
 
       <View>
         <Text
