@@ -1,6 +1,6 @@
 # Giphy Demo
 
-Demo app designed using API of Giphy site
+### Demo app designed using API of Giphy site
 
 ![alt text](https://github.com/michael-williamson/Giphy_Demo/blob/main/media/welcome_screen.png)
 ![alt text](https://github.com/michael-williamson/Giphy_Demo/blob/main/media/search_screen.png)
@@ -21,16 +21,19 @@ Demo app designed using API of Giphy site
 
 3. You will need a couple of API keys available @ https://developers.giphy.com/docs/sdk. You will need an API key associated with React Native SDK & an API key associated with the Giphy API.
 
-4. Once these keys are available create a file in the root folder "keys.tsx" & inside this file create an exported object "export const keys = {
-   GIPHY_DEMO_SDK_KEY:"YOUR_SDK_KEY",
-   GIPHY_DEMO_API_KEY:"YOUR_API_KEY"
-   }
-   "
-5. Very Important!! Now add "keys.tsx" in the .gitignore file to prevent any Keys being pushed to a public repository.
+4. Once these keys are available create a file in the root folder "keys.tsx" & inside this file create an exported object
 
-6. After configuring an emulator to run React Native, type either npx react-native run-android
+```export const keys = {
+  GIPHY_DEMO_SDK_KEY:"YOUR_SDK_KEY",
+  GIPHY_DEMO_API_KEY:"YOUR_API_KEY"
+  }
+```
+
+5. **Very Important!!** Now add "_keys.tsx_" in the _.gitignore_ file to prevent any Keys being pushed to a public repository.
+
+6. After configuring an emulator to run React Native, type npx react-native run-android
 
 # Notes
 
-!! important: There are some Object properties in the Giphy API that may not contain values thus returning undefined. It is important to consider handling this possibility so that
+**!! important:** There are some Object properties in the Giphy API that may not contain values thus returning _undefined_. It is important to consider handling this possibility so that
 it doesn't break the app. One example is here: https://developers.giphy.com/docs/api/schema#image-object In the first paragraph " (Please note that some GIFs don’t have every property available.)"
